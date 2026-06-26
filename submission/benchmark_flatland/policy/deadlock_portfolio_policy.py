@@ -65,6 +65,32 @@ class DLAFastSwitchPolicy(DeadLockAvoidancePolicy):
         )
 
 
+class DLAFree2NoSwitchNoEntryPolicy(DeadLockAvoidancePolicy):
+    """Two-cell spacing without switch penalties for a measured scene-1 level-3 win."""
+
+    def __init__(self):
+        super().__init__(
+            min_free_cell=2,
+            count_num_opp_agents_towards_min_free_cell=False,
+            use_switches_heuristic=False,
+            use_entering_prevention=False,
+            seed=42,
+        )
+
+
+class DLAFree2NoSwitchEntryPolicy(DeadLockAvoidancePolicy):
+    """Two-cell spacing plus entry prevention for a measured scene-1 level-2 win."""
+
+    def __init__(self):
+        super().__init__(
+            min_free_cell=2,
+            count_num_opp_agents_towards_min_free_cell=False,
+            use_switches_heuristic=False,
+            use_entering_prevention=True,
+            seed=42,
+        )
+
+
 class DLAEnteringPreventionPolicy(DeadLockAvoidancePolicy):
     """Default deadlock logic plus prevention of simultaneous map entry."""
 

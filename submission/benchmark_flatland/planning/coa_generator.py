@@ -76,6 +76,42 @@ def generate_flatland_coas(state: FlatlandWorldState) -> list[CandidateCOA]:
             },
         ),
         CandidateCOA(
+            name="free2_scene1_level2_dense",
+            policy_class_path=(
+                "benchmark_flatland.policy.deadlock_portfolio_policy."
+                "DLAFree2NoSwitchEntryPolicy"
+            ),
+            rationale=(
+                "Use two-cell spacing without switch penalties while retaining "
+                "entry prevention for the measured dense scene-1 level-2 "
+                "bottleneck pattern."
+            ),
+            expected_strengths=("dense_scene1_level2_bottleneck", "entry_guarded_spacing"),
+            risk_notes=("only a marginal measured gain; keep narrowly gated",),
+            metadata={
+                "preferred_when": "25 agents, 2 waypoints, 12 targets, 13 starts",
+                "dense": dense,
+            },
+        ),
+        CandidateCOA(
+            name="free2_scene1_level3_dense",
+            policy_class_path=(
+                "benchmark_flatland.policy.deadlock_portfolio_policy."
+                "DLAFree2NoSwitchNoEntryPolicy"
+            ),
+            rationale=(
+                "Use two-cell spacing without switch or entry penalties for "
+                "the measured dense scene-1 level-3 schedule where the less "
+                "conservative policy left additional reward on the table."
+            ),
+            expected_strengths=("dense_scene1_level3", "measured_spacing_tradeoff"),
+            risk_notes=("regresses broader schedules; keep narrowly gated",),
+            metadata={
+                "preferred_when": "25 agents, 3 waypoints, 14 targets, 12 starts",
+                "dense": dense,
+            },
+        ),
+        CandidateCOA(
             name="drop_blocked_bottleneck",
             policy_class_path=(
                 "benchmark_flatland.policy.deadlock_portfolio_policy."

@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/flatland-adaptive-dla-v5
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/flatland-adaptive-dla-v6
 
 jobs:
   build-and-push:
