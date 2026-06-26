@@ -1,0 +1,199 @@
+{
+  "status": "in_progress",
+  "created_at": "2026-06-24",
+  "last_updated": "2026-06-24",
+  "official_sources": {
+    "starterkit": "https://github.com/flatland-association/ecml2026-starterkit",
+    "flatland_rl": "https://github.com/flatland-association/flatland-rl",
+    "flatland_baselines": "https://github.com/flatland-association/flatland-baselines",
+    "flatland_book_challenge": "https://flatland-association.github.io/flatland-book/challenges/ecml2026.html",
+    "flatland_book_eval": "https://flatland-association.github.io/flatland-book/challenges/ecml2026/eval.html",
+    "competition_portal": "https://competition.flatland.cloud/"
+  },
+  "leaderboard_access": {
+    "status": "not_checked_yet",
+    "notes": [
+      "Do not claim public-best or record-breaking result until authenticated official leaderboard data is retrieved."
+    ]
+  },
+  "repositories": {
+    "ecml2026_starterkit": {
+      "path": "/mnt/data2/src/ecml2026-starterkit",
+      "commit": "ac8b1fdeda2b7e8409a9bd61f16c45b8525c228d",
+      "last_log": "ac8b1fd Update README with competition information and image (#12)"
+    },
+    "flatland_rl": {
+      "path": "/mnt/data2/src/flatland-rl",
+      "commit": "bcff919593141fc6b6e0ca117637da8b557f3e98",
+      "last_log": "bcff9195 docs(graph rail env): add illustration of graph rail env and its limitations. (#436)"
+    },
+    "flatland_baselines": {
+      "path": "/mnt/data2/src/flatland-baselines",
+      "commit": "c5b344d43e231e26e54520732e0f63d6796785a7",
+      "last_log": "c5b344d Merge pull request #64 from flatland-association/feature/update-v4.2.6-postfix"
+    }
+  },
+  "verified_challenge_facts": {
+    "supported_flatland_versions": ["4.2.5", "4.2.6"],
+    "starterkit_flatland_version": "4.2.6",
+    "submission_format": "Docker image submitted through competition portal",
+    "policy_interface": "RailEnvPolicy",
+    "policy_methods": ["act", "act_many_optional"],
+    "actions": {
+      "DO_NOTHING": 0,
+      "MOVE_LEFT": 1,
+      "MOVE_FORWARD": 2,
+      "MOVE_RIGHT": 3,
+      "STOP_MOVING": 4
+    },
+    "reward_class": "flatland.envs.rewards.ECML2026Rewards",
+    "single_scenario_reward_range": [-1, 1],
+    "submission_score": "sum over scenario scores",
+    "per_level_threshold": "If fewer than 25% agents arrive in a level, subsequent levels are not evaluated.",
+    "runtime_limits": {
+      "cpu_cores": 4,
+      "ram_gb": 15,
+      "gpu": false,
+      "scenario_timeout_minutes": 30,
+      "total_submission_hours": 5
+    },
+    "daily_submission_limit": 2,
+    "documented_deadline": "2026-06-29 AoE",
+    "official_docs_last_checked": "2026-06-25"
+  },
+  "ecml2026_rewards": {
+    "source": "/mnt/data2/src/flatland-rl/flatland/envs/rewards.py",
+    "cancellation_factor": 5.0,
+    "cancellation_time_buffer": 0.0,
+    "target_not_reached_minimum_penalty": 100.0,
+    "intermediate_not_served_penalty": 50.0,
+    "intermediate_late_arrival_penalty_factor": 0.5,
+    "intermediate_early_departure_penalty_factor": 0.5,
+    "collision_factor": 250.0
+  },
+  "audit_logs": {
+    "starterkit_inspection": "/mnt/data2/outputs/flatland2026/audit/starterkit_inspection.txt",
+    "starterkit_runtime_files": "/mnt/data2/outputs/flatland2026/audit/starterkit_runtime_files.txt",
+    "flatland_rl_key_files": "/mnt/data2/outputs/flatland2026/audit/flatland_rl_key_files.txt",
+    "flatland_rl_api_rewards": "/mnt/data2/outputs/flatland2026/audit/flatland_rl_api_rewards.txt",
+    "flatland_baselines_inspection": "/mnt/data2/outputs/flatland2026/audit/flatland_baselines_inspection.txt",
+    "docker_build_starterkit_random": "/mnt/data2/outputs/flatland2026/audit/docker_build_starterkit_random.log"
+  },
+  "official_docker_smoke": {
+    "status": "blocked",
+    "image": "flatland2026/starterkit-random:ac8b1fd",
+    "base_image": "ghcr.io/flatland-association/flatland-baselines:v4.2.6",
+    "blocker": "Docker daemon is configured to use 127.0.0.1:8070, but no proxy service was listening; direct GHCR pull is reachable but extremely slow.",
+    "evidence": "After about 209 seconds, largest layer was about 37.75 MB / 6.45 GB.",
+    "docker_proxy_restored": true,
+    "next_fix": "Start/restore a working A100 proxy on 127.0.0.1:8070 or pre-pull ghcr.io/flatland-association/flatland-baselines:v4.2.6, then rerun unchanged Docker build."
+  },
+  "conda_env": {
+    "name": "flatland2026",
+    "status": "blocked",
+    "blocker": "conda create failed with HTTP 403 for https://repo.anaconda.com/pkgs/main"
+  },
+  "source_mode_env": {
+    "status": "ready",
+    "python_env": "/mnt/data2/envs/flatland2026_venv",
+    "pip_cache": "/mnt/data2/pip_cache/flatland2026",
+    "flatland_version": "4.2.6",
+    "note": "Created after user instructed to skip Docker; all large files and caches are on /mnt/data2."
+  },
+  "baselines": {
+    "inspected": [
+      "random",
+      "do_nothing_heuristic",
+      "forward_only_heuristic",
+      "forever_heuristic",
+      "deadlock_avoidance_heuristic"
+    ],
+    "executed": [
+      {
+        "mode": "source_mode_non_docker",
+        "baseline": "starterkit_random",
+        "scenario": "level_0_scenario_1",
+        "success_rate": 0.5,
+        "normalized_reward": 0.0,
+        "env_time": 493,
+        "trajectory_dir": "/mnt/data2/outputs/flatland2026/source_smoke_random",
+        "analysis_dir": "/mnt/data2/outputs/flatland2026/source_smoke_random_analysis"
+      },
+      {
+        "mode": "source_mode_non_docker",
+        "baseline": "forward_only",
+        "scenario": "level_0_scenario_1",
+        "success_rate": 0.3333333333333333,
+        "normalized_reward": 0.3066801619433198,
+        "env_time": 493,
+        "trajectory_dir": "/mnt/data2/outputs/flatland2026/source_smoke_forward_only",
+        "analysis_dir": "/mnt/data2/outputs/flatland2026/source_smoke_forward_only_analysis"
+      },
+      {
+        "mode": "source_mode_non_docker",
+        "baseline": "deadlock_avoidance",
+        "scenario": "level_0_scenario_1",
+        "success_rate": 1.0,
+        "normalized_reward": 0.5128205128205128,
+        "env_time": 204,
+        "trajectory_dir": "/mnt/data2/outputs/flatland2026/source_smoke_deadlock_avoidance",
+        "analysis_dir": "/mnt/data2/outputs/flatland2026/source_smoke_deadlock_avoidance_analysis"
+      }
+    ],
+    "summary_outputs": {
+      "root": "/mnt/data2/outputs/flatland2026/baselines",
+      "baseline_summary_csv": "/mnt/data2/outputs/flatland2026/baselines/baseline_summary.csv",
+      "scenario_results_json": "/mnt/data2/outputs/flatland2026/baselines/scenario_results.json",
+      "baseline_report_md": "/mnt/data2/outputs/flatland2026/baselines/baseline_report.md",
+      "representative_replay_mp4": "/mnt/data2/outputs/flatland2026/baselines/representative_replay.mp4",
+      "representative_replay_gif": "/mnt/data2/outputs/flatland2026/baselines/representative_replay.gif"
+    },
+    "best_source_mode_baseline": {
+      "baseline": "deadlock_avoidance",
+      "success_rate": 1.0,
+      "normalized_reward": 0.5128205128205128,
+      "reward_delta_vs_random": 0.5128205128205128,
+      "success_rate_delta_vs_random": 0.5
+    },
+    "curriculum_source_mode": {
+      "baseline": "deadlock_avoidance",
+      "num_scenarios": 27,
+      "mean_success_rate": 0.8088888888888889,
+      "mean_normalized_reward": 0.7272532036673374,
+      "sum_normalized_reward": 19.635836499018108,
+      "min_success_rate": 0.24,
+      "max_success_rate": 1.0,
+      "failure_taxonomy": {
+        "all_agents_arrived": 17,
+        "partial_above_level_threshold": 8,
+        "partial_below_level_threshold": 2
+      },
+      "outputs": {
+        "results_csv": "/mnt/data2/outputs/flatland2026/baselines/curriculum_deadlock_avoidance_results.csv",
+        "completion_by_level_csv": "/mnt/data2/outputs/flatland2026/baselines/curriculum_completion_by_level.csv",
+        "reward_by_scenario_csv": "/mnt/data2/outputs/flatland2026/baselines/curriculum_normalized_reward_by_scenario.csv",
+        "runtime_by_scenario_csv": "/mnt/data2/outputs/flatland2026/baselines/curriculum_runtime_by_scenario.csv",
+        "failure_taxonomy_json": "/mnt/data2/outputs/flatland2026/baselines/curriculum_failure_taxonomy.json",
+        "summary_json": "/mnt/data2/outputs/flatland2026/baselines/curriculum_summary.json",
+        "report_md": "/mnt/data2/outputs/flatland2026/baselines/curriculum_report.md"
+      }
+    },
+    "adaptive_policy_v1": {
+      "policy": "benchmark_flatland.policy.deadlock_portfolio_policy.AdaptiveDLA25LessElseEnteringPolicy",
+      "mode": "source_mode_non_docker",
+      "num_scenarios": 27,
+      "mean_success_rate": 0.8377777777777777,
+      "mean_normalized_reward": 0.7516745126279141,
+      "sum_normalized_reward": 20.29521184095368,
+      "baseline_sum_normalized_reward": 19.635836499018108,
+      "reward_delta_vs_deadlock_avoidance": 0.6593753419355721,
+      "selection_rule": "Use less-conservative deadlock avoidance for environments with at least 25 agents; use entering-prevention deadlock avoidance otherwise.",
+      "outputs": {
+        "summary_json": "/mnt/data2/outputs/flatland2026/baselines/adaptive_dla_v1/summary.json",
+        "results_csv": "/mnt/data2/outputs/flatland2026/baselines/adaptive_dla_v1/curriculum_results.csv",
+        "comparison_csv": "/mnt/data2/outputs/flatland2026/baselines/adaptive_dla_v1/comparison_vs_deadlock_avoidance.csv",
+        "report_md": "/mnt/data2/outputs/flatland2026/baselines/adaptive_dla_v1/report.md"
+      }
+    }
+  }
+}
