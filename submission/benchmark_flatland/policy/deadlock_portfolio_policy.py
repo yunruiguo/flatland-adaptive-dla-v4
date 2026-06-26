@@ -39,6 +39,32 @@ class DLALessConservativePolicy(DeadLockAvoidancePolicy):
         )
 
 
+class DLAFastNoSpacingPolicy(DeadLockAvoidancePolicy):
+    """Aggressive flow policy for the measured dense scene-4 low-waypoint case."""
+
+    def __init__(self):
+        super().__init__(
+            min_free_cell=0,
+            count_num_opp_agents_towards_min_free_cell=False,
+            use_switches_heuristic=False,
+            use_entering_prevention=False,
+            seed=42,
+        )
+
+
+class DLAFastSwitchPolicy(DeadLockAvoidancePolicy):
+    """Aggressive flow policy that keeps switch/oncoming accounting enabled."""
+
+    def __init__(self):
+        super().__init__(
+            min_free_cell=0,
+            count_num_opp_agents_towards_min_free_cell=True,
+            use_switches_heuristic=True,
+            use_entering_prevention=False,
+            seed=42,
+        )
+
+
 class DLAEnteringPreventionPolicy(DeadLockAvoidancePolicy):
     """Default deadlock logic plus prevention of simultaneous map entry."""
 

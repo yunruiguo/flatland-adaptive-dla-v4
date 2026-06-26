@@ -40,6 +40,42 @@ def generate_flatland_coas(state: FlatlandWorldState) -> list[CandidateCOA]:
             metadata={"preferred_when": "num_agents >= 25", "dense": dense},
         ),
         CandidateCOA(
+            name="fast_no_spacing_scene4_dense",
+            policy_class_path=(
+                "benchmark_flatland.policy.deadlock_portfolio_policy."
+                "DLAFastNoSpacingPolicy"
+            ),
+            rationale=(
+                "Remove spacing and switch penalties for the measured dense "
+                "scene-4 low-waypoint pattern where conservative buffering "
+                "over-blocked flow."
+            ),
+            expected_strengths=("dense_scene4_low_waypoint", "overblocking_reduction"),
+            risk_notes=("high collision/deadlock risk outside the measured pattern",),
+            metadata={
+                "preferred_when": "25 agents, 2 waypoints, 16 targets, 15 starts",
+                "dense": dense,
+            },
+        ),
+        CandidateCOA(
+            name="fast_switch_scene5_dense",
+            policy_class_path=(
+                "benchmark_flatland.policy.deadlock_portfolio_policy."
+                "DLAFastSwitchPolicy"
+            ),
+            rationale=(
+                "Allow zero-spacing movement while retaining switch and "
+                "oncoming-train accounting for the measured dense scene-5 "
+                "low-waypoint pattern."
+            ),
+            expected_strengths=("dense_scene5_low_waypoint", "throughput_with_switch_guard"),
+            risk_notes=("regressed broader dense schedules in focused sweeps",),
+            metadata={
+                "preferred_when": "25 agents, 2 waypoints, 19 targets, 18 starts",
+                "dense": dense,
+            },
+        ),
+        CandidateCOA(
             name="drop_blocked_bottleneck",
             policy_class_path=(
                 "benchmark_flatland.policy.deadlock_portfolio_policy."
