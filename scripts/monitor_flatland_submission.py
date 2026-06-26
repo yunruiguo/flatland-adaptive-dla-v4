@@ -42,7 +42,7 @@ def get_submissions() -> list[dict[str, Any]]:
 def get_score(submission_id: str) -> tuple[float | None, float | None]:
     try:
         data = get_json(f"/results/submissions/{submission_id}")
-    except urllib.error.HTTPError:
+    except (TimeoutError, urllib.error.HTTPError, urllib.error.URLError):
         return None, None
     body = data.get("body", [])
     if not body:
